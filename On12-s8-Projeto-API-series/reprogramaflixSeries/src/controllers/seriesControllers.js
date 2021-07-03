@@ -1,29 +1,28 @@
-const { request, response } = require('express');
 const series = require('../models/series.json');
 
-const home = (request, response) => {
-    response.status(200).send('Olá, seja bem-vindo a minha API de Séries ❤️')
+const home = (req, res) => {
+    res.status(200).send('Olá, seja bem-vindo a minha API de Séries ❤️')
 };
 
-const getAll = (request, response) => {
-    response.status(200).send(series);
+const getAll = (req, res) => {
+    res.status(200).send(series);
 };
 
-const getByTitle = (request, response) => {
-    const titleRequire = request.query.title
+const getByTitle = (req, res) => {
+    const titleRequire = req.query.title
     const titleFilter = series.find(serie => serie.title.toLowerCase().includes(titleRequire))
 
     if (titleRequire === '' || titleFilter === undefined) {
-        response.status(404).send({
+        res.status(404).send({
             'mensage': 'Por favor, insira um título válido'
         })
     } else {
-        response.status(200).send(titleFilter);
+        res.status(200).send(titleFilter);
     }
 }
 
-const getByGenre = (request, response) => {
-    const requestedGenre = request.query.genre
+const getByGenre = (req, res) => {
+    const requestedGenre = req.query.genre
     const seriesListGenre = [];
 
     series.forEach(genres => {
@@ -35,18 +34,18 @@ const getByGenre = (request, response) => {
             }
         }
         if (requestedGenre === '' || seriesListGenre === undefined) {
-            response.status(404).send({
+            res.status(404).send({
                 'mensage': 'Por favor, insira um genero válido'
             })
         } else {
-            response.status(200).send(seriesListGenre);
+            res.status(200).send(seriesListGenre);
         }
     })
-    response.status(200).send(seriesListGenre)
+    res.status(200).send(seriesListGenre)
 }
 
-const getByWriters = (request, response) => {
-    const requestWriters = request.query.writers
+const getByWriters = (req, res) => {
+    const requestWriters = req.query.writers
     const seriesListWriters = [];
 
     series.forEach(writer => {
@@ -58,17 +57,17 @@ const getByWriters = (request, response) => {
             }
         }
         if (requestWriters === '' || seriesListWriters === undefined) {
-            response.status(404).send({
+            res.status(404).send({
                 'mensage': 'Por favor, insira um genero válido'
             })
         } else {
-            response.status(200).send(seriesListWriters);
+            res.status(200).send(seriesListWriters);
         }
     })
 }
 
-const getByActors = (request, response) => {
-    const requestActors = request.query.actors
+const getByActors = (req, res) => {
+    const requestActors = req.query.actors
     const seriesListActors = [];
 
     series.forEach(actor => {
@@ -80,19 +79,19 @@ const getByActors = (request, response) => {
             }
         }
         if (requestActors === '' || seriesListActors === undefined) {
-            response.status(404).send({
+            res.status(404).send({
                 'mensage': 'Por favor, insira um ator válido'
             })
         } else {
-            response.status(200).send(seriesListActors);
+            res.status(200).send(seriesListActors);
         }
     })
 }
 
-const getById = (request, response) => {
-    const idRequire = request.params.id;
+const getById = (req, res) => {
+    const idRequire = req.params.id;
     const idFilter = series.find(movie => movie.id == idRequire);
-    response.status(200).send(idFilter);
+    res.status(200).send(idFilter);
 };
 
 
