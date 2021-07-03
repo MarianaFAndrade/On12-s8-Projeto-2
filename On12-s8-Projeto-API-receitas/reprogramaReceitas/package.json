@@ -1,0 +1,18 @@
+{
+  "name": "reprogramareceitas",
+  "version": "1.0.0",
+  "description": "API de receitas",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Mariana Andrade",
+  "license": "ISC",
+  "keywords": []
+}
